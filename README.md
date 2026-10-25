@@ -19,6 +19,9 @@
 **Methodology & Results:**
 *   **Results:** Successfully modeled complex, non-linear data distributions. The model demonstrates high-fidelity synthesis of diverse geometric shapes and captures the underlying structural manifolds of joint point clouds effectively.
 *   **Methodology:** Implemented both 1D analytical diffusion processes and 2D deep learning diffusion models using **PyTorch**. The architecture leverages a reverse denoising process parameterized by a neural network. Advanced implementation includes joint point-cloud diffusion, where the model processes and denoises sets of 1024 points simultaneously, learning global shape templates rather than isolated points.
+*   **Limitations:** The current implementation of the joint point-cloud diffusion scales poorly (in terms of memory and compute) if the number of points per sample significantly exceeds 1024. The self-attention mechanisms required to process the entire point cloud globally are \(O(N^2)\) complex.
+*   **Future Work:** I propose integrating sparse attention mechanisms (e.g., Performer or Linformer architectures) or adopting a hierarchical latent diffusion approach. This would allow the model to scale to dense 3D LiDAR point clouds (e.g., >100k points) suitable for autonomous driving applications.
+
 
 ---
 
@@ -37,6 +40,8 @@
 **Methodology & Results:**
 *   **Results:** Successfully minimized reprojection errors across complex multi-view setups, generating accurate 3D point estimations from calibrated 2D projections.
 *   **Methodology:** Utilized classical geometric computer vision techniques. Formulated the pinhole camera model and solved the triangulation problem using **Nonlinear Least Squares** optimization with `SciPy`. Evaluated the robustness of the reprojection error minimization.
+*   **Limitations:** The current nonlinear least squares solver is highly sensitive to outlier 2D matches and assumes a static scene without moving objects.
+*   **Future Work:** To improve robustness, integrating an advanced robust loss function (e.g., Huber or Cauchy loss) into the optimization backend is necessary. Furthermore, coupling the triangulation module with a Graph Neural Network (GNN) could help filter out dynamic outliers before the optimization step.
 
 
 ---
@@ -56,21 +61,6 @@
 **Methodology & Results:**
 *   **Results:** Delivered a computationally efficient detection algorithm suitable for edge-device deployment, demonstrating that well-engineered classical pipelines can achieve high accuracy on specific detection tasks.
 *   **Methodology:** Implemented sophisticated spatial filtering, edge detection, and morphological operations using **OpenCV** and **NumPy**. Extracted hand-crafted image features to drive the classification logic.
-
-
----
-
-## 🔬 Limitations & Future Work
-
-Critical analysis is essential for transitioning from research to production. Below are identified limitations and proposed architectural improvements:
-
-**Generative Diffusion Models (Point Clouds):**
-*   **Limitations:** The current implementation of the joint point-cloud diffusion scales poorly (in terms of memory and compute) if the number of points per sample significantly exceeds 1024. The self-attention mechanisms required to process the entire point cloud globally are \(O(N^2)\) complex.
-*   **Future Work:** I propose integrating sparse attention mechanisms (e.g., Performer or Linformer architectures) or adopting a hierarchical latent diffusion approach. This would allow the model to scale to dense 3D LiDAR point clouds (e.g., >100k points) suitable for autonomous driving applications.
-
-**Robust 3D Reconstruction:**
-*   **Limitations:** The current nonlinear least squares solver is highly sensitive to outlier 2D matches and assumes a static scene without moving objects.
-*   **Future Work:** To improve robustness, integrating an advanced robust loss function (e.g., Huber or Cauchy loss) into the optimization backend is necessary. Furthermore, coupling the triangulation module with a Graph Neural Network (GNN) could help filter out dynamic outliers before the optimization step.
 
 ---
 
