@@ -14,7 +14,7 @@
 ## 🌟 Featured Projects
 
 ### 1. [Generative Diffusion Models for 2D Point Clouds](https://github.com/YgggC/Image-analysis/tree/main/Project_Diffusion_models/notebooks)
-**Objective:** Engineer a scalable diffusion-based neural network architecture capable of learning and generating complex 2D geometric shapes (Circle, S-curve, Swiss Roll) and joint point-cloud distributions from noise.
+**Objective:** Engineer a scalable diffusion-based neural network architecture capable of learning and generating complex 2D geometric shapes (Circle, Square, Dinohead) and joint point-cloud distributions from noise.
 
 **Methodology & Results:**
 *   **Results:** Successfully modeled complex, non-linear data distributions. The model demonstrates high-fidelity synthesis of diverse geometric shapes and captures the underlying structural manifolds of joint point clouds effectively.
